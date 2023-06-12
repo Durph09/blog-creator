@@ -4,11 +4,16 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "../Logo/Logo";
+import { useContext, useEffect } from "react";
+import PostsContext from "../../context/postContext";
 
-export const AppLayout = ({ children, availableTokens, posts, postId }) => {
+export const AppLayout = ({ children, availableTokens, posts: postsFromSSR, postId }) => {
   const { user } = useUser();
-  console.log("POSTId from applayhout js10", postId)
-  console.log("POSTs from applayhout js10", posts)
+
+  const {setPostsFromSSR, posts, getPosts} = useContext(PostsContext);
+  useEffect(()=> {
+    setPostsFromSSR(postsFromSSR);
+  }, [postsFromSSR, setPostsFromSSR]);
   
 
   return (
@@ -40,6 +45,10 @@ export const AppLayout = ({ children, availableTokens, posts, postId }) => {
     </Link>
   );
 })}
+<div onClick={() =>
+{
+  getPosts({lastPostDate: posts[posts.length-1]});
+}} className="hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4 " >Load more posts</div>
 
         </div>
         <div className="bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">

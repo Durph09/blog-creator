@@ -20,7 +20,9 @@ export const getAppProps = async (ctx) => {
     .collection("posts")
     .find({
       userId: user._id,
-    }).sort({
+    })
+    .limit(5)
+    .sort({
         created: -1
     })
     .toArray();
