@@ -30,7 +30,7 @@ export const getAppProps = async (ctx) => {
   return {
     availableTokens: user.availableTokens,
     posts: posts.map(({ created, _id, userId, ...rest }) => ({
-      id: _id.toString(),
+      _id: _id.toString(),
       created: created.toString(),
       ...rest,
     })),
