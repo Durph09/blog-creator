@@ -15,6 +15,7 @@ export const AppLayout = ({
   postCreated
 }) => {
   const { user } = useUser();
+  console.log("AppLayout js 18 user: ", user);
 
   const { setPostsFromSSR, posts, getPosts, noMorePosts } =
     useContext(PostsContext);
