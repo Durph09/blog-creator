@@ -98,7 +98,7 @@ export default function NewStream (props) {
           />
         </div>
 
-        <button className="btn" type="submit" disabled={!topic.trim() || !keywords.trim()} onClick={handleSubmit}> 
+        <button className="btn" type="submit" disabled={!topic.trim() || !keywords.trim()} > 
           Generate
         </button>
       </form>
