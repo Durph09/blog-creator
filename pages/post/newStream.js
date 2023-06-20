@@ -10,7 +10,7 @@ import { faBrain } from "@fortawesome/free-solid-svg-icons";
 import { redirect } from "next/dist/server/api-utils";
 import {useCompletion} from 'ai/react'
 
-export default function NewPost(props) {
+export default function NewStream (props) {
   const router = useRouter();
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
@@ -24,7 +24,7 @@ export default function NewPost(props) {
    
     handleSubmit
   } = useCompletion({
-    api: '/api/completion',
+    api: '/api/generatepost1',
     headers: {
       "content-type": "application/json",
     },
@@ -39,9 +39,9 @@ export default function NewPost(props) {
   return (
     <div className="h-full overflow-hidden">
       
-      {!!generating && (
+     
        
-        <div className="overflow-auto h-full">
+        <div className="overflow-auto">
         <div className="max-w-screen-sm mx-auto">
           <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
             SEO title and meta description
@@ -69,11 +69,6 @@ export default function NewPost(props) {
         
         
       
-      )}
-
-
-     
-      {!generating && (
       <div className="w-full h-full flex flex-col overflow-auto">
         <form onSubmit={handleSubmit} className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xl border border-slate-200 shadow-slate-200">
         <div >
@@ -108,13 +103,13 @@ export default function NewPost(props) {
         </button>
       </form>
       </div>
-      )}
+     
     </div>
     
   )
 }
 
-NewPost.getLayout = function getLayout(page, pageProps) {
+NewStream.getLayout = function getLayout(page, pageProps) {
   return <AppLayout {...pageProps}>{page}</AppLayout>;
 }
 
