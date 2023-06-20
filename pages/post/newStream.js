@@ -1,3 +1,5 @@
+'use client'
+
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout/AppLayout";
 import { useState } from "react";
@@ -101,10 +103,11 @@ export default function NewPost(props) {
           />
         </div>
 
-        <button className="btn" type="submit" disabled={!topic.trim() || !keywords.trim()}> 
+        <button className="btn" type="submit" disabled={!topic.trim() || !keywords.trim()} onClick={handleSubmit}> 
           Generate
         </button>
-      </form></div>
+      </form>
+      </div>
       )}
     </div>
     
