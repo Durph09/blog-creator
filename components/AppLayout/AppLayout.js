@@ -12,20 +12,19 @@ export const AppLayout = ({
   availableTokens,
   posts: postsFromSSR,
   postId,
-  postCreated
+  postCreated,
 }) => {
   const { user } = useUser();
-  console.log("AppLayout js 18 user: ", user);
 
   const { setPostsFromSSR, posts, getPosts, noMorePosts } =
     useContext(PostsContext);
 
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);
-    if(postId){
-      const exists = postsFromSSR.find(post => post._id === postId);
-      if(!exists) {
-        getPosts({getNewerPosts: true, lastPostDate: postCreated})
+    if (postId) {
+      const exists = postsFromSSR.find((post) => post._id === postId);
+      if (!exists) {
+        getPosts({ getNewerPosts: true, lastPostDate: postCreated });
       }
     }
   }, [postsFromSSR, setPostsFromSSR, postId, postCreated, getPosts]);
@@ -36,35 +35,31 @@ export const AppLayout = ({
         <div className="bg-slate-800 px-2">
           <Logo />
           <Link href="/post/new" className="btn">
-            New Post
+            New post
           </Link>
           <Link href="/token-topup" className="block mt-2 text-center">
             <FontAwesomeIcon icon={faCoins} className="text-yellow-500" />
             <span className="pl-1">{availableTokens} tokens available</span>
           </Link>
         </div>
-        <div className="flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-800">
-          {posts.map((post) => {
-            // Log the _id of each post
-            console.log(`post._id: ${post._id}`);
-
-            return (
-              <Link
-                key={post._id}
-                href={`/post/${post._id}`}
-                className={`py-1 border border-white/0 block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm 
-      ${postId === post._id ? "bg-white/20 border-white " : ""}`}
-              >
-                {post.topic}
-              </Link>
-            );
-          })}
+        <div className="px-4 flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-800">
+          {posts.map((post) => (
+            <Link
+              key={post._id}
+              href={`/post/${post._id}`}
+              className={`py-1 border border-white/0 block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
+                postId === post._id ? 'bg-white/20 border-white' : ''
+              }`}
+            >
+              {post.topic}
+            </Link>
+          ))}
           {!noMorePosts && (
             <div
               onClick={() => {
-                getPosts({ lastPostDate: posts[posts.length - 1] });
+                getPosts({ lastPostDate: posts[posts.length - 1].created });
               }}
-              className="hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4 "
+              className="hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4"
             >
               Load more posts
             </div>
