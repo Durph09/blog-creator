@@ -1,3 +1,4 @@
+'use client'
 import {OpenAIStream, StreamingTextResponse} from 'ai'
 import { Configuration, OpenAIApi } from "openai-edge";
 
