@@ -20,7 +20,7 @@ export default function NewStream (props) {
   
 
 
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     
     try{
