@@ -21,7 +21,8 @@ export default function NewStream (props) {
 
  const {
   completion,
-  handleSubmit,
+  handleSubmit
+
  } = useCompletion({
   api: '/api/generatePost1',
   headers: {
@@ -69,7 +70,7 @@ export default function NewStream (props) {
         
       
       <div className="w-full h-full flex flex-col overflow-auto">
-        <form onSubmit={handleSubmit} className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xl border border-slate-200 shadow-slate-200">
+        <form  className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xl border border-slate-200 shadow-slate-200">
         <div >
           <label>
             <strong>Generate a blog post on the topic of:</strong>
@@ -97,7 +98,7 @@ export default function NewStream (props) {
           />
         </div>
 
-        <button className="btn" type="submit" disabled={!topic.trim() || !keywords.trim()} > 
+        <button className="btn" type="submit" disabled={!topic.trim() || !keywords.trim()} onClick={handleSubmit}> 
           Generate
         </button>
       </form>
