@@ -15,23 +15,28 @@ export default function NewStream (props) {
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
-  const [postResponse, setPostResponse] = useState("");
+  const [completion, setCompletion] = useState("");
   
 
 
-  const {
-    completion,
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
    
-    handleSubmit
-  } = useCompletion({
-    api: '/api/generatepost1',
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ topic, keywords }),
+    const response = await fetch(`/api/generatePost1`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ topic, keywords }),
+    });
   
-  })
+    console.log("RESULT: ", completion);
+setCompletion(await response.text())
     
+    };
+
+  
 
     
  
@@ -63,7 +68,7 @@ export default function NewStream (props) {
           <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
             Blog post
           </div>
-         {completion}
+          <div dangerouslySetInnerHTML={{ __html: completion || '' }} />
           </div>
           </div>
         
