@@ -15,26 +15,20 @@ export default function NewStream (props) {
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
-  const [completion, setCompletion] = useState("");
+  
   
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-   
-    const response = await fetch(`/api/generatePost1`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ topic, keywords }),
-    });
-  
-    console.log("RESULT: ", completion);
-setCompletion(await response.text())
-    
-    };
+ const {
+  completion,
+  handleSubmit,
+ } = useCompletion({
+  api: '/api/generatePost1',
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({ topic, keywords }),
+})
 
   
 
