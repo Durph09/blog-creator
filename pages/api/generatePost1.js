@@ -12,7 +12,7 @@ import { Configuration, OpenAIApi } from "openai-edge";
   export const runtime ='edge'
 
  export async function POST (req) {
-const { topic, keywords } = req.body;
+const { topic, keywords } = await req.body;
   
     const postContentResponse = await openai.createCompletion({
       model: "gpt-3.5-turbo",
