@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Logo } from "../components/Logo/Logo";
 import Link from "next/link";
-import Hero from "/hero.webp"
+import Hero from "../public/hero.webp";
 
 export default function Home() {
   return (
